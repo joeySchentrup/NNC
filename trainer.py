@@ -59,7 +59,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 use_gpu = torch.cuda.is_available()
-print_now("Using GPU?" + use_gpu)
+print_now("Using GPU? " + str(use_gpu))
 
 # Get a batch of training data
 inputs, classes = next(iter(dataloaders['train']))
@@ -125,8 +125,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                     optimizer.step()
 
                 # statistics
-                running_loss += loss.item() * inputs.size(0)
-                running_corrects += torch.sum(preds == labels.data)
+                running_loss += loss.item() * inputs.size(0).float()
+                running_corrects += torch.sum(preds == labels.data).float()
 
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects / dataset_sizes[phase]
@@ -139,7 +139,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
 
-        print_now()
+        print_now("\n")
 
     time_elapsed = time.time() - since
     print_now('Training complete in {:.0f}m {:.0f}s'.format(
