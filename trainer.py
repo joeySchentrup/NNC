@@ -10,6 +10,10 @@ import time
 import os
 import copy
 
+def print_now(item):
+    print(item)
+    sys.stdout.flush()
+
 ######################################################################
 # Load Data
 # ---------
@@ -145,10 +149,6 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     # load best model weights
     model.load_state_dict(best_model_wts)
     return model
-
-def print_now(item):
-    print(item)
-    sys.stdout.flush()
 
 ######################################################################
 # Finetuning the convnet
