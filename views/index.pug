@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .ui.middle.aligned.center.aligned.grid
+    .column
+      form.ui.large.form
+        .ui.stacked.segment
+          .field
+            .ui.left.icon.input
+              i.user.icon
+              input(type="text" name="username" placeholder="Username")
+          .field
+            .ui.left.icon.input
+              i.lock.icon
+              input(type="password" name="password" placeholder="Password")
+          a(href="/main")
+            .ui.fluid.large.green.submit.button Login
+    //div
+      h.3 Welcome to fauna finder
+      p We help wildlife researchers everywhere by scanning videos to find their desired wildlife. No longer will an intern have to watch 3 hours of video to write down when an animal is spotted. With Fauna Finder, we catalog the camera, date, and time your desired species was captured.

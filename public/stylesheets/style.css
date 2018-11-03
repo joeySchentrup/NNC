@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #014421; }
+  body header {
+    background-color: #CCB299;
+    width: 100%; }
+    body header .logo {
+      cursor: pointer;
+      margin: 0 auto 0 auto;
+      background-image: url("../images/logo_full_black.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 40%;
+      text-align: center;
+      display: block;
+      height: 100px;
+      width: 500px; }
+    body header .header {
+      height: 100px; }
+  body .uploadbutton {
+    margin: 10px 10px 0 10px !important; }
+  body #upload-input {
+    display: none; }
+
+a {
+  color: #00B7FF; }
+
+/*# sourceMappingURL=style.css.map */

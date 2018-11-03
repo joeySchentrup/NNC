@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .ui.middle.aligned.center.aligned.grid
+    .column
+      .uploadbutton
+        form(action='/uploadfile', enctype="multipart/form-data", method="post")
+          .ui.action.input
+            input#filepath(type="text", name="file-path", readonly)
+            .ui.green.right.labeled.icon.button.upload-btn Select file
+              i.upload.icon
+          button.ui.button.uploadbutton Upload
+            input#upload-input(type="file", name="image", accept="image/jpeg")
+
+block script
+  script.
+    $('.upload-btn').on('click', function() {
+      $('#upload-input').click();
+    });
+    $('#upload-input').on('change', function() {
+      var filePath = $('#upload-input').get(0).files[0].name;
+      $('#filepath').val(filePath);
+    });
