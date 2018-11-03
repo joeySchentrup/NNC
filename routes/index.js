@@ -1,4 +1,5 @@
 var express = require('express');
+const child_process = require('child_process');
 var formidable = require('formidable');
 var cpy = require('cpy');
 var path = require('path');
@@ -54,17 +55,30 @@ router.post('/uploadtrainning', function(req, res, next) {
       //Will need to be updated if we want multipul trainning data sets at a time
       let linkPath = path.normalize(path.join(__dirname, '../trainning_data'));
 
+      console.log("Zip file received. Unzipping...")
 	    var zip = new AdmZip(files.zip.path); // reading archives
-      
       zip.extractAllTo(linkPath, true);
+
+      //fork python process
+      console.log("Unzipped. Starting trainer...");
+      const pythonProcess = child_process.spawn('python3', ["./trainer.py"]);
       
-      cmd.get(
+      console.log("Running trainer.");
+      pythonProcess.stdout.on('data', (data) => {
+        console.log(`Trainning: ${data}`)
+      });
+
+      pythonProcess.stderr.on('data', (data) => {
+        console.log(`Trainning error: ${data}`);
+      });
+
+      /*cmd.get(
         'python3 "trainer.py"',
         (err, data, stderr) => {
           console.log(data)
           res.render('result', {isDeer  : data});
         }
-      )
+      )*/
     }
   });
 });
