@@ -55,6 +55,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 use_gpu = torch.cuda.is_available()
+print_now("Using GPU?" + use_gpu)
 
 # Get a batch of training data
 inputs, classes = next(iter(dataloaders['train']))
