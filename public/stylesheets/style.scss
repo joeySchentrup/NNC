@@ -4,24 +4,26 @@ body {
   // padding: 50px;
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: $beige;
+  background-color: $background;
   header {
-    background-color: $dark-green;
+    background-color: $headerbackground;
     width: 100%;
     .logo {
       cursor: pointer;
-      margin: 0 auto 0 auto;
-      background-image: url('../images/logo_full_black.png');
+      margin-left: 50px;
+      margin-top: auto;
+      margin-bottom: auto;
+      background-image: url('../images/brain.png');
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: 50% 40%;
+      background-position: 50% 30%;
       text-align: center;
       display: block;
-      height: 100px;
-      width: 500px;
+      height: 120px;
+      width:140px;
     }
     .header {
-      height: 100px;
+      height: 140px;
     }
   }
 
@@ -32,8 +34,28 @@ body {
   #upload-input {
     display: none;
   }
+
+  .new-column-left {
+    float: left;
+    width: 15%;
+  }
+  .new-column-right {
+    float: right;
+    width: 82%
+  }  
+  .row:after {
+     content: "";
+     display: table;
+     clear: both;
+  }   
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(0, 89, 255);
 }
+
+  h1 {
+    min-height: 1rem;
+    font-size: 5rem;
+    margin-top: 20px;
+  }

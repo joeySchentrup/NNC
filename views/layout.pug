@@ -1,17 +1,17 @@
 doctype html
 html.gr__semantic-ui_com
   head
-    title= title
+    title=title
     link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block header
       header
-        div.header
-          a(href='/')
-            //div
-              p "Neural Network Classifier"
-            color: black
+        .row#header
+          .new-column-left
+            span.logo
+          .new-column-right
+            h1="NNC: Neural Network Classifier"
     block content
     script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
     script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js')
