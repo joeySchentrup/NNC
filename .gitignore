@@ -3,6 +3,8 @@
 /target/
 /.metadata/
 
+models
+
 # Created by https://www.gitignore.io/api/vim,node
 
 ### Node ###
