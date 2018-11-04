@@ -19,8 +19,16 @@ def print_now(item):
     print(item)
     sys.stdout.flush()
 
-loader = transforms.Compose([transforms.ToTensor()])
+#This may need to be edited to take in specfic model
+model_ft = torch.load("./models/model.out")
 use_gpu = torch.cuda.is_available()
+
+print_now("Use GPU? " + str(use_gpu))
+if use_gpu:
+    model_ft = model_ft.cuda()
+    loader = transforms.Compose([transforms.ToTensor().cuda()])
+else:
+    loader = transforms.Compose([transforms.ToTensor()])
 
 def check_data(model, data):
     model.train(False)  # Set model to evaluate mode
@@ -32,13 +40,6 @@ def check_data(model, data):
     preds_str = str(preds)
     preds_str = preds_str.strip()
     return preds_str[:-29]
-
-#This may need to be edited to take in specfic model
-model_ft = torch.load("./models/model.out")
-
-print_now("Use GPU? " + str(use_gpu))
-if use_gpu:
-    model_ft = model_ft.cuda()
 
 loader = transforms.Compose([
     transforms.RandomResizedCrop(224),
