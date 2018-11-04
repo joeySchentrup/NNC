@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import time
 import os
 import copy
+import sys
 
 loader = transforms.Compose([transforms.ToTensor()])
 use_gpu = torch.cuda.is_available()
@@ -45,7 +46,7 @@ def image_loader(image_name):
     # fake batch dimension required to fit network's input dimensions
     image = image.unsqueeze(0)
     return image
-
-image = image_loader("./fileToAnalyze.jpg")
+    
+image = image_loader(sys.argv[1])
 
 print(check_data(model_ft, image))

@@ -12,7 +12,7 @@ const model_data = "../models/model.out"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('testpicture');
+  res.render('index');
 });
 
 router.get('/main', function(req, res, next) {
@@ -30,26 +30,17 @@ router.post('/testpicture', function(req, res, next) {
       let filename = "fileToAnalyze.jpg";
       let linkPath = path.normalize(path.join(__dirname, './..'));
 
-      console.log("File received. Copying file...")
-      cpy([files.image.path], linkPath, {
-        rename: filename
-      }).then(() => {
+      console.log("File received. Starting model...");
+      const pythonProcess = child_process.spawn('python3', ["./predictor.py", files.image.path]);
+      
+      console.log("Model done.");
+      pythonProcess.stderr.on('data', (data) => {
+        console.log(`Model error: ${data}`);
+      });
 
-        console.log("Copied. Starting model...");
-        const pythonProcess = child_process.spawn('python3', ["./predictor.py"]);
-        
-        console.log("Model done.");
-        pythonProcess.stderr.on('data', (data) => {
-          console.log(`Model error: ${data}`);
-        });
-
-        pythonProcess.stdout.on('data', (data) => {
-          console.log(`Model output: ${data}`)
-          res.render('result', {isDeer: parseInt(data) ? 'Deer!' : 'No deer!'});
-        });
-      }, (err) => {
-        console.log(`ERROR: ${err}`);
-        res.sendStatus(500);
+      pythonProcess.stdout.on('data', (data) => {
+        console.log(`Model output: ${data}`)
+        res.render('result', {isDeer: parseInt(data) ? 'Deer!' : 'No deer!'});
       });
     }
   });
