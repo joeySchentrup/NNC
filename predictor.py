@@ -16,7 +16,6 @@ import copy
 import sys
 
 loader = transforms.Compose([transforms.ToTensor()])
-use_gpu = torch.cuda.is_available()
 
 def check_data(model, data):
     model.train(False)  # Set model to evaluate mode
@@ -45,10 +44,6 @@ def image_loader(image_name):
 #This may need to be edited to take in specfic model
 model_ft = torch.load("./models/model.out")
 image = image_loader(sys.argv[1])
-
-if use_gpu:
-    model_ft = model_ft.cuda()
-    image = image.cuda()
 
 print(check_data(model_ft, image))
 sys.stdout.flush()
