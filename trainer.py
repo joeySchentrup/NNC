@@ -10,6 +10,10 @@ import time
 import os
 import copy
 
+def print_now(item):
+    print(item)
+    sys.stdout.flush()
+
 ######################################################################
 # Load Data
 # ---------
@@ -55,7 +59,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 use_gpu = torch.cuda.is_available()
-print_now("Using GPU?" + use_gpu)
+print_now("Using GPU? " + str(use_gpu))
 
 # Get a batch of training data
 inputs, classes = next(iter(dataloaders['train']))
@@ -121,8 +125,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                     optimizer.step()
 
                 # statistics
-                running_loss += loss.item() * inputs.size(0)
-                running_corrects += torch.sum(preds == labels.data)
+                running_loss += loss.item() * float(inputs.size(0))
+                running_corrects += torch.sum(preds == labels.data).float()
 
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects / dataset_sizes[phase]
@@ -135,7 +139,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
 
-        print_now()
+        print_now("\n")
 
     time_elapsed = time.time() - since
     print_now('Training complete in {:.0f}m {:.0f}s'.format(
@@ -145,10 +149,6 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     # load best model weights
     model.load_state_dict(best_model_wts)
     return model
-
-def print_now(item):
-    print(item)
-    sys.stdout.flush()
 
 ######################################################################
 # Finetuning the convnet
@@ -173,6 +173,6 @@ optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                       num_epochs=30)
-torch.save(model_ft, ".models/model.out")
+                       num_epochs=1)
+torch.save(model_ft, "./models/model.out")
 
