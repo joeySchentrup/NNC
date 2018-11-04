@@ -64,6 +64,8 @@ router.post('/uploadtraining', function(req, res, next) {
       const removeDirectory= child_process.spawnSync('rm', ["-r" , training_data]);
       const removeModel= child_process.spawnSync('rm', [model_data]);
       const makeDirectory = child_process.spawnSync('mkdir', [training_data]);
+      classes.size = 0;
+      classes.name = [];
 
       console.log("Data cleared. Unzipping...")
 	    var zip = new AdmZip(files.zip.path); // reading archives
