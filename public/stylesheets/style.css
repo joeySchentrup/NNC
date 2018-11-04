@@ -34,6 +34,13 @@ body {
     text-align: center;
     display: block;
     background-color: white; }
+  body instruction {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    text-align: center;
+    display: block;
+    background-color: white; }
   body .uploadbutton {
     margin: 10px 10px 0 10px !important; }
   body #upload-input {

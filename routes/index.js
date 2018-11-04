@@ -16,7 +16,7 @@ router.get('/main', function(req, res, next) {
   res.render('main');
 });
 
-router.post('/uploadtest', function(req, res, next) {
+router.post('/testpicture', function(req, res, next) {
   let form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     if(err) {
