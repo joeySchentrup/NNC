@@ -19,16 +19,8 @@ def print_now(item):
     print(item)
     sys.stdout.flush()
 
-#This may need to be edited to take in specfic model
-model_ft = torch.load("./models/model.out")
+loader = transforms.Compose([transforms.ToTensor()])
 use_gpu = torch.cuda.is_available()
-
-print_now("Use GPU? " + str(use_gpu))
-if use_gpu:
-    model_ft = model_ft.cuda()
-    loader = transforms.Compose([transforms.ToTensor().cuda()])
-else:
-    loader = transforms.Compose([transforms.ToTensor()])
 
 def check_data(model, data):
     model.train(False)  # Set model to evaluate mode
@@ -53,7 +45,14 @@ def image_loader(image_name):
     # fake batch dimension required to fit network's input dimensions
     image = image.unsqueeze(0)
     return image
-    
+
+#This may need to be edited to take in specfic model
+model_ft = torch.load("./models/model.out")
 image = image_loader(sys.argv[1])
+
+print_now("Use GPU? " + str(use_gpu))
+if use_gpu:
+    model_ft = model_ft.cuda()
+    image = image.cuda()
 
 print_now(check_data(model_ft, image))
