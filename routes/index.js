@@ -42,7 +42,7 @@ router.post('/testpicture', function(req, res, next) {
         (err, data, stderr) => {
           console.log("Result: " + data)
 
-          res.render('result', {returnData: "Found in piture :" + classes.name[parseInt(data)]});
+          res.render('result', {returnData: "Found in piture: " + classes.name[parseInt(data)]});
         }
       )
     }
