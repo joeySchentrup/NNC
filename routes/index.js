@@ -71,6 +71,9 @@ router.post('/uploadtraining', function(req, res, next) {
       
       console.log("Running trainer.");
       pythonProcess.stdout.on('data', (data) => {
+        if(data.indexOf("Best val Acc") > -1){
+          res.render('testpicture');
+        }
         console.log(`Training: ${data}`)
       });
 
@@ -78,7 +81,6 @@ router.post('/uploadtraining', function(req, res, next) {
         console.log(`Training error: ${data}`);
       });
 
-      res.render('testpicture');
     }
   });
 });
