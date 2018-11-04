@@ -125,7 +125,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                     optimizer.step()
 
                 # statistics
-                running_loss += loss.item() * inputs.size(0).float()
+                running_loss += loss.item() * float(inputs.size(0))
                 running_corrects += torch.sum(preds == labels.data).float()
 
             epoch_loss = running_loss / dataset_sizes[phase]
@@ -173,6 +173,6 @@ optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                       num_epochs=30)
-torch.save(model_ft, ".models/model.out")
+                       num_epochs=1)
+torch.save(model_ft, "./models/model.out")
 
