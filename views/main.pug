@@ -3,18 +3,18 @@ extends layout
 block content
   .ui.middle.aligned.center.aligned.grid
     .column
-    div 
-      h3="Upload trainnig set"
-    .uploadbutton
-      form(action='/uploadtrainning', enctype="multipart/form-data", method="post")
-        .ui.action.input
-          input#filepath(type="text", name="file-path", readonly)
-          .ui.blue.right.labeled.icon.button.upload-btn Select file
-            i.upload.icon
-        button.ui.button.uploadbutton Upload
-          input#upload-input(type="file", name="zip", accept="application/zip")
+      .uploadbutton
+        form(action='/uploadtrainning', enctype="multipart/form-data", method="post")
+          .ui.action.input
+            input#filepath(type="text", name="file-path", readonly)
+            .ui.blue.right.labeled.icon.button.upload-btn Select file
+              i.upload.icon
+          button.ui.button.uploadbutton Upload
+            input#upload-input(type="file", name="zip", accept="application/zip")
 
-block script
+  instructions
+    h2 How to upload your data
+    p To upload your data you should have it in a zip file, this is what you will actually be uploading. In this file you will have two more folders, one named train and the other named val. In the train folder you should have two more folders, one with images including the object you are trying to classify and one with negative images. This will be a large data set(at least 70 negative and 30 postive images). In the val folder you will also have two folders with images containing what you are classifying and one with negative images. This folder should not contain any repeat images and will have a much small data set(at least 10 postive and 10 negative). Once uploaded it will train the machine and will take you to another page well you can then use the algorithm on new photos.
   script.
     $('.upload-btn').on('click', function() {
       $('#upload-input').click();
@@ -23,3 +23,4 @@ block script
       var filePath = $('#upload-input').get(0).files[0].name;
       $('#filepath').val(filePath);
     });
+    

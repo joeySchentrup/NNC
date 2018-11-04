@@ -14,6 +14,10 @@ block content
         button.ui.button.uploadbutton Upload
           input#upload-input(type="file", name="image", accept="image/jpeg")
 
+    instruction
+      h2 Now you can use your algorithm!
+      p After uploading your zip file, you have now successfully trained the machine. To use, just upload a photo and the machine will tell you whether your desired data subject is present or not.
+
 block script
   script.
     $('.upload-btn').on('click', function() {

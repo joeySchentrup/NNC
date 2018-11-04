@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #05057a; }
+  background-color: #585858; }
   body header {
     background-color: #585858;
     width: 100%; }
@@ -20,6 +20,27 @@ body {
       width: 140px; }
     body header .header {
       height: 140px; }
+  body infobox {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    text-align: center;
+    display: block;
+    background-color: white; }
+  body instructions {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    text-align: center;
+    display: block;
+    background-color: white; }
+  body instruction {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    text-align: center;
+    display: block;
+    background-color: white; }
   body .uploadbutton {
     margin: 10px 10px 0 10px !important; }
   body #upload-input {
