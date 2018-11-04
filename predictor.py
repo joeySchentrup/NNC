@@ -15,6 +15,10 @@ import os
 import copy
 import sys
 
+def print_now(item):
+    print(item)
+    sys.stdout.flush()
+
 loader = transforms.Compose([transforms.ToTensor()])
 use_gpu = torch.cuda.is_available()
 
@@ -31,6 +35,8 @@ def check_data(model, data):
 
 #This may need to be edited to take in specfic model
 model_ft = torch.load("./models/model.out")
+
+print_now("Use GPU? " + str(use_gpu))
 if use_gpu:
     model_ft = model_ft.cuda()
 
@@ -49,4 +55,4 @@ def image_loader(image_name):
     
 image = image_loader(sys.argv[1])
 
-print(check_data(model_ft, image))
+print_now(check_data(model_ft, image))
