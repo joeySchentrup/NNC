@@ -27,7 +27,7 @@ def check_data(model, data):
     
     preds_str = str(preds)
     preds_str = preds_str.strip()
-    var index = preds_str.index("[")
+    index = preds_str.index("[")
     return preds_str[index + 1]
 
 loader = transforms.Compose([

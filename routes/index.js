@@ -30,18 +30,14 @@ router.post('/testpicture', function(req, res, next) {
       let filename = "fileToAnalyze.jpg";
       let linkPath = path.normalize(path.join(__dirname, './..'));
 
-      console.log("File received. Starting model...");
-      const pythonProcess = child_process.spawn('python3', ["./predictor.py", files.image.path]);
-      
-      console.log("Model done.");
-      pythonProcess.stderr.on('data', (data) => {
-        console.log(`Model error: ${data}`);
-      });
-
-      pythonProcess.stdout.on('data', (data) => {
-        console.log(`Model output: ${data}`)
-        res.render('result', {isDeer: parseInt(data) ? 'Deer!' : 'No deer!'});
-      });
+      console.log("File received. Running model...");  
+      cmd.get(
+        "python3 predictor.py " + files.image.path,
+        (err, data, stderr) => {
+          console.log(data)
+          res.render('result', {isDeer: parseInt(data) ? 'Deer!' : 'No deer!'});
+        }
+      )
     }
   });
 });
