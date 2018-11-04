@@ -12,7 +12,7 @@ const model_data = "../models/model.out"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('testpicture');
 });
 
 router.get('/main', function(req, res, next) {
@@ -28,7 +28,7 @@ router.post('/testpicture', function(req, res, next) {
 
     if(files.image.size !== 0) {
       let filename = "fileToAnalyze.jpg";
-      let linkPath = path.normalize(path.join(__dirname, '../'));
+      let linkPath = path.normalize(path.join(__dirname, './..'));
 
       console.log("File received. Copying file...")
       cpy([files.image.path], linkPath, {
