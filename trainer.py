@@ -144,6 +144,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     time_elapsed = time.time() - since
     print_now('Training complete in {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
+    
+    print_now("Class to index: " + str(image_datasets['train'].class_to_idx))
     print_now('Best val Acc: {:4f}'.format(best_acc))
 
     # load best model weights

@@ -8,7 +8,13 @@ var router = express.Router();
 var AdmZip = require('adm-zip');
 
 const training_data = "../training_data"
-const model_data = "../models/model.out"
+const model_data = "../models/model.out" 
+
+var classes = {
+  size:0,
+  name:[]
+};
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,8 +40,9 @@ router.post('/testpicture', function(req, res, next) {
       cmd.get(
         "python3 predictor.py " + files.image.path,
         (err, data, stderr) => {
-          console.log(data)
-          res.render('result', {isDeer: parseInt(data) ? 'Deer!' : 'No deer!'});
+          console.log("Result: " + data)
+
+          res.render('result', {returnData: "Found in piture :" + classes.name[parseInt(data)]});
         }
       )
     }
@@ -67,6 +74,19 @@ router.post('/uploadtraining', function(req, res, next) {
       
       console.log("Running trainer.");
       pythonProcess.stdout.on('data', (data) => {
+        if(data.indexOf("Class to index:") > -1) {
+          //Class to index: {'deer': 0, 'not-deer': 1}
+          var classesStr = data.substring((data.indexOf("Class to index: {") + 1), (data.indexOf("}")));
+          while(true) {
+            classesStr = classesStr.substring(1);
+            classes.name[classes.size++] = classesStr.substring(0, classesStr.indexOf("'"));
+            if(classesStr.indexOf(",") > -1) {
+              classesStr = classesStr.substring(classesStr.indexOf(",") + 2);
+            } else {
+              break;
+            }
+          }
+        }
         if(data.indexOf("Best val Acc") > -1){
           res.render('testpicture');
         }
