@@ -44,7 +44,7 @@ router.post('/testpicture', function(req, res, next) {
   });
 });
 
-router.post('/uploadtrainning', function(req, res, next) {
+router.post('/uploadtraining', function(req, res, next) {
   let form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     if(err) {

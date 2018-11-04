@@ -45,7 +45,7 @@ data_transforms = {
     ]),
 }
 
-data_dir = "./trainning_data/deer_data" #this needs to change based on the user
+data_dir = "./trainning_data" #this needs to change based on the user
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
