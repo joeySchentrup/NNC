@@ -7,6 +7,8 @@ var cmd = require('node-cmd');
 var router = express.Router();
 var AdmZip = require('adm-zip');
 
+const training_data = "../training_data"
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -52,24 +54,27 @@ router.post('/uploadtraining', function(req, res, next) {
     }
 
     if(files.zip.size !== 0) {
-      //Will need to be updated if we want multipul trainning data sets at a time
-      let linkPath = path.normalize(path.join(__dirname, '../trainning_data'));
+      //Will need to be updated if we want multipul Training data sets at a time
+      let linkPath = path.normalize(path.join(__dirname, training_data));
 
-      console.log("Zip file received. Unzipping...")
+      console.log("Zip file received. Clearing out old data...")
+      const removeDirectory= child_process.spawnSync('rm', ["-r" , training_data]);
+      const makeDirectory = child_process.spawnSync('mkdir', [training_data]);
+
+      console.log("Data cleared. Unzipping...")
 	    var zip = new AdmZip(files.zip.path); // reading archives
       zip.extractAllTo(linkPath, true);
 
-      //fork python process
       console.log("Unzipped. Starting trainer...");
       const pythonProcess = child_process.spawn('python3', ["./trainer.py"]);
       
       console.log("Running trainer.");
       pythonProcess.stdout.on('data', (data) => {
-        console.log(`Trainning: ${data}`)
+        console.log(`Training: ${data}`)
       });
 
       pythonProcess.stderr.on('data', (data) => {
-        console.log(`Trainning error: ${data}`);
+        console.log(`Training error: ${data}`);
       });
 
       res.render('testpicture');
