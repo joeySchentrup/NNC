@@ -72,13 +72,7 @@ router.post('/uploadtrainning', function(req, res, next) {
         console.log(`Trainning error: ${data}`);
       });
 
-      /*cmd.get(
-        'python3 "trainer.py"',
-        (err, data, stderr) => {
-          console.log(data)
-          res.render('result', {isDeer  : data});
-        }
-      )*/
+      res.render('testpicture');
     }
   });
 });

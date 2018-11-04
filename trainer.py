@@ -55,6 +55,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 use_gpu = torch.cuda.is_available()
+print_now("Using GPU?" + use_gpu)
 
 # Get a batch of training data
 inputs, classes = next(iter(dataloaders['train']))
@@ -172,6 +173,6 @@ optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                       num_epochs=98)
+                       num_epochs=30)
 torch.save(model_ft, ".models/model.out")
 
