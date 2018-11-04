@@ -27,8 +27,8 @@ def check_data(model, data):
     
     preds_str = str(preds)
     preds_str = preds_str.strip()
-    print("String: " + preds_str)
-    return preds_str[:-29]
+    var index = preds_str.index("[")
+    return preds_str[index + 1]
 
 loader = transforms.Compose([
     transforms.RandomResizedCrop(224),
