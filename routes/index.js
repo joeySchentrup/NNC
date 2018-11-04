@@ -76,7 +76,7 @@ router.post('/uploadtraining', function(req, res, next) {
       pythonProcess.stdout.on('data', (data) => {
         if(data.indexOf("Class to index:") > -1) {
           //Class to index: {'deer': 0, 'not-deer': 1}
-          var classesStr = data.substring((data.indexOf("Class to index: {") + 1), (data.indexOf("}")));
+          var classesStr = data.toString().substring((data.indexOf("Class to index: {") + 1), (data.indexOf("}")));
           while(true) {
             classesStr = classesStr.substring(1);
             classes.name[classes.size++] = classesStr.substring(0, classesStr.indexOf("'"));
